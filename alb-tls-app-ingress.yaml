@@ -7,6 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/healthcheck-path: /images/
   labels:
     app: alb-tls-app-ingress
   name: alb-tls-app-ingress
