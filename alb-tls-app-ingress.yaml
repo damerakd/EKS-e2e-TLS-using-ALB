@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    alb.ingress.kubernetes.io/certificate-arn: <certificate_arn>
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    kubernetes.io/ingress.class: alb
+  labels:
+    app: alb-tls-app-ingress
+  name: alb-tls-app-ingress
+  namespace: default
+spec:
+  rules:
+  - host: test.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: alb-tls-app-cip
+          servicePort: 443
+        path: /images/

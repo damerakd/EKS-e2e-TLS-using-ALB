@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  app.conf: |-
+    server {
+      listen 443 ssl;
+      # server_name should be replaced with ALB DNS name after Ingress is created;
+      server_name <replace_with_server_name>;
+      ssl_certificate /etc/nginx/ssl/tls.crt;
+      ssl_certificate_key /etc/nginx/ssl/tls.key;
+
+      default_type text/plain;
+
+      location /images/ {
+        return 200 "hello from pod $hostname\n";
+      }
+    }
+kind: ConfigMap
+metadata:
+  name: secure-config
+  namespace: default
